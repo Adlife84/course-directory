@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter, Link } from 'react-router-dom';
+import { Route, NavLink, Redirect } from 'react-router-dom';
 
 //App components
 import Course from './courses/Course'
@@ -8,24 +8,24 @@ import HTML from './courses/HTML'
 import JavaScript from './courses/JavaScript'
 
 
-const Courses = () => (
-  <BrowserRouter>
+const Courses = ({match}) => (
     <div className="main-content courses">
       <div className="course-header group">
         <h2>Courses</h2>
         <ul className="course-nav">
-          <li><Link to='/courses/html'>HTML</Link></li>
-          <li><Link to='/courses/css'>CSS</Link></li>
-          <li><Link to='/courses/javascript'>JavaScript</Link></li>
+          <li><NavLink to={`${match.url}/html`}>HTML</NavLink></li>
+          <li><NavLink to={`${match.url}/css`}>CSS</NavLink></li>
+          <li><NavLink to={`${match.url}/javascript`}>JavaScript</NavLink></li>
         </ul>
       </div>
 
       {/* Write routes here... */}
-      <Route path="/courses/html" component={HTML} />
-      <Route path="/courses/css" component={CSS} />
-      <Route path="/courses/javascript" component={JavaScript} />
+      
+      <Route exact path={match.path} render={ () => <Redirect to={`${match.path}/html`} />} />
+      <Route path={`${match.path}/html`} component={HTML} />
+      <Route path={`${match.path}/css`} component={CSS} />
+      <Route path={`${match.path}/javascript`} component={JavaScript} />
     </div>
-  </BrowserRouter>
 );
 
 export default Courses;
