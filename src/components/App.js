@@ -12,6 +12,8 @@ import About from './About';
 import Teachers from './Teachers';
 import Courses from './Courses';
 import NotFound from './NotFound';
+import Featured from './Featured';
+
 
 
 
@@ -22,7 +24,8 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
-        <Route path="/teachers" component={Teachers} />
+        <Route exact path="/teachers" component={Teachers} />
+        <Route path="/teachers/:name/:topic" component={Featured} />
         <Route path="/courses" component={Courses} />
         <Route component={NotFound} />
       </Switch>
